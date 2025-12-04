@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 import { X, Image as ImageIcon } from 'lucide-react'
-import { supabase } from '../../api/supabaseClient'
 
 interface ImageUploaderProps {
   onImageUpload: (url: string) => void
@@ -36,28 +35,28 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
     setUploading(true)
 
     try {
-      // Create unique filename
-      const fileExt = file.name.split('.').pop()
-      const fileName = `${Math.random()}.${fileExt}`
-      const filePath = `report-images/${fileName}`
+      // Create FormData for Cloudinary upload
+      const formData = new FormData()
+      formData.append('image', file)
 
-      // Upload to Supabase Storage
-      const { error: uploadError } = await supabase.storage
-        .from('images')
-        .upload(filePath, file)
+      // Upload to Cloudinary via your API
+      const response = await fetch('https://clean-cal-api.vercel.app/upload', {
+        method: 'POST',
+        body: formData,
+      })
 
-      if (uploadError) {
-        throw uploadError
+      if (!response.ok) {
+        throw new Error(`Upload failed: ${response.statusText}`)
       }
 
-      // Get public URL
-      const { data } = supabase.storage
-        .from('images')
-        .getPublicUrl(filePath)
+      const data = await response.json()
 
-      if (data?.publicUrl) {
-        setPreview(data.publicUrl)
-        onImageUpload(data.publicUrl)
+      // Cloudinary returns the image URL
+      if (data?.url) {
+        setPreview(data.url)
+        onImageUpload(data.url)
+      } else {
+        throw new Error('No URL returned from upload')
       }
     } catch (error) {
       console.error('Error uploading image:', error)

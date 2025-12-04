@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
                 <Link to="/reports-map" className="text-white hover:text-lime-300 flex items-center transition-colors">
                   <span className="w-5 h-5 mr-1">🗺️</span> Report Map
                 </Link>
-                <Link to="/hire-cleaners" className="text-white hover:text-lime-300 flex items-center transition-colors">
+                <Link to="/recyclables" className="text-white hover:text-lime-300 flex items-center transition-colors">
                   <span className="w-5 h-5 mr-1">♻️</span> Hire Cleaners
                 </Link>
               </div>

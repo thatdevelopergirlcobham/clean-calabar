@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
       requiresAuth: false,
     },
     {
-      path: '/hire-cleaners',
+      path: '/recyclables',
       icon: Users,
       label: 'Hire Cleaners',
       requiresAuth: false,

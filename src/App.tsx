@@ -24,6 +24,7 @@ import Logout from './pages/auth/Logout'
 import Profile from './pages/community/Profile'
 import ReportDetailPage from './pages/community/ReportDetail'
 import HireCleaners from './pages/community/HireCleaners'
+import RecyclablesMarketplace from './pages/community/RecyclablesMarketplace'
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -52,68 +53,69 @@ const Shell: React.FC = () => {
       {!isAdminRoute && <Navbar />}
       <main className="pb-16 md:pb-0">
         <Routes>
-                      {/* Public Routes */}
-                      <Route path="/" element={<AuthenticatedHomeRedirect />} />
-                      
-                      <Route path="/auth" element={<Auth />} />
-                      <Route path="/logout" element={<Logout />} />
-                      <Route path="/about" element={<About />} />
+          {/* Public Routes */}
+          <Route path="/" element={<AuthenticatedHomeRedirect />} />
 
-                      
-                      <Route path="/home" element={<HomeTau />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/about" element={<About />} />
 
-                      {/* Community Routes */}
-                      <Route path="/reports/:id" element={<ReportDetailPage />} />
-                      <Route path="/reports-map" element={<MapView />} />
-                      <Route path="/my-reports" element={<UserReportsManager />} />
-                      <Route path="/agents" element={<AgentHire />} />
-                      <Route path="/hire-cleaners" element={<HireCleaners />} />
-                      <Route
-                        path="/profile"
-                        element={
-                          <ProtectedRoute>
-                            <Profile />
-                          </ProtectedRoute>
-                        }
-                      />
 
-                      {/* Admin Routes */}
-                      <Route path="/admin/login" element={<AdminLogin />} />
-                      <Route
-                        path="/admin"
-                        element={
-                          <ProtectedRoute requireAdmin={true}>
-                            <AdminLayout>
-                              <AdminDashboard />
-                            </AdminLayout>
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/admin/reports"
-                        element={
-                          <ProtectedRoute requireAdmin={true}>
-                            <AdminLayout>
-                              <PendingReports />
-                            </AdminLayout>
-                          </ProtectedRoute>
-                        }
-                      />
-                      
-                      <Route
-                        path="/admin/analytics"
-                        element={
-                          <ProtectedRoute requireAdmin={true}>
-                            <AdminLayout>
-                              <AnalyticsDashboard />
-                            </AdminLayout>
-                          </ProtectedRoute>
-                        }
-                      />
+          <Route path="/home" element={<HomeTau />} />
 
-                      {/* Fallback Routes */}
-                      <Route path="/404" element={<NotFound />} />
-                      <Route path="*" element={<Navigate to="/404" replace />} />
+          {/* Community Routes */}
+          <Route path="/reports/:id" element={<ReportDetailPage />} />
+          <Route path="/reports-map" element={<MapView />} />
+          <Route path="/my-reports" element={<UserReportsManager />} />
+          <Route path="/agents" element={<AgentHire />} />
+          <Route path="/hire-cleaners" element={<HireCleaners />} />
+          <Route path="/recyclables" element={<RecyclablesMarketplace />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminLayout>
+                  <AdminDashboard />
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/reports"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminLayout>
+                  <PendingReports />
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/analytics"
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminLayout>
+                  <AnalyticsDashboard />
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Fallback Routes */}
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </main>
 
